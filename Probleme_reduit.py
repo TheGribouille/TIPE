@@ -32,14 +32,10 @@ n = 0
 
 #On part de la dernière ligne et on remonte jusqu'a la premiere
 for nb_ligne in range(N - 1, -1, -1):
-    #A chaque ligne, on determine pour chaque case du circuit (case !=0) en combien de coups on peut l'atteindre depuis chacune des cases possibles du circuit. Il faut definir un coup et en donner les parametres.
+    #A chaque ligne, on determine pour chaque case du circuit (case !=0) en combien de coups on peut atteindre une case N.
+    #Il faut definir un coup et en donner les parametres.
     ligne = map[nb_ligne]
     for nb_colonne in range(N):
         case = map[nb_ligne][nb_colonne]
         if case != 0:
-            #On trouve les lignes possibles:
-            #On parcourt les lignes stm inferieures, car v_y stm negatif, d'ou on peut atteindre case au pire avec v = v_max
-            for lignes_poss in range(ligne - 1, ligne - v_max - 1, -1):
-                #Dans chacune des lignes_poss, on trouve les cases_poss:
-                
-                
+            #On associe a cette case la liste des trajets possibles pour atteindre une case N avec la vitesse a avoir en quittant cette case
