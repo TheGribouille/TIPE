@@ -59,4 +59,6 @@ def ...(map):
                 for i in nb_ligne_arr:
                     li += trajets_possibles( nb_ligne, nb_colonne, i)
                 
-                
+# A chaque case, on regarde toutes les autres cases accessibles (qui sont + proches de l'arrivee)
+# et on prend les chemins de cette nouvelle case qui ont une vitesse de depart compatible avec
+# la vitesse requise pour acceder a cette case.
