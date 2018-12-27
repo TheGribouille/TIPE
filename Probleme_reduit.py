@@ -26,7 +26,20 @@ n = 0
 
 
 ## Algo dynamique
+def vitesse_compatible(v1, v2): #teste si en arrivant dans une case a v1, en la supposant dans les bornes, on peut la quitter a v2
+    vx1, vy1 = v1
+    vx2, vy2 = v2
+    bornes_vx = range(-v_max, v_max + 1)
+    bonres_vy = range(-v_max, 0)
+    if vx2 in bornes_vx and vy2 in bornes_vy:
+        if vy2 in [vy1, vy1 + 1, vy1 - 1]:
+            if vx2 in [vx1, vx1 + 1, vx1 - 1]:
+                return True
+    return False
 
+def trajets_possibles(x_dep, y_dep, x_arr): #y_arr = N - 1
+    #renvoie la liste des listes des case intermediaires, nombre de coups (nombre de cases intermediaires), vitesse a avoir en quittant la case
+    
 #On veut que n ( = ligne sur laquelle se trouve la voiture ) soit N - 1 = 10 ici.
 #On trouvera les chemins et nb de coups necessaires pour chaque case d'arrivee. On en prend le min.
 
