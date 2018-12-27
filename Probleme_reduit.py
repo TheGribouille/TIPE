@@ -40,15 +40,23 @@ def vitesse_compatible(v1, v2): #teste si en arrivant dans une case a v1, en la 
 def trajets_possibles(x_dep, y_dep, x_arr): #y_arr = N - 1
     #renvoie la liste des listes des case intermediaires, nombre de coups (nombre de cases intermediaires), vitesse a avoir en quittant la case
     
+    
 #On veut que n ( = ligne sur laquelle se trouve la voiture ) soit N - 1 = 10 ici.
 #On trouvera les chemins et nb de coups necessaires pour chaque case d'arrivee. On en prend le min.
 
 #On part de la dernière ligne et on remonte jusqu'a la premiere
-for nb_ligne in range(N - 1, -1, -1):
-    #A chaque ligne, on determine pour chaque case du circuit (case !=0) en combien de coups on peut atteindre une case N.
-    #Il faut definir un coup et en donner les parametres.
-    ligne = map[nb_ligne]
-    for nb_colonne in range(N):
-        case = map[nb_ligne][nb_colonne]
-        if case != 0:
-            #On associe a cette case la liste des trajets possibles pour atteindre une case N avec la vitesse a avoir en quittant cette case
+def ...(map):
+    nb_ligne_arr = [i for i in range(N) if map[N - 1][i] != 0]
+    for nb_ligne in range(N - 1, -1, -1):
+        #A chaque ligne, on determine pour chaque case du circuit (case !=0) en combien de coups on peut atteindre une case N.
+        #Il faut definir un coup et en donner les parametres.
+        ligne = map[nb_ligne]
+        for nb_colonne in range(N):
+            case = ligne[nb_colonne]
+            if case != 0:
+                #On associe a cette case la liste des trajets possibles pour atteindre une case N avec la vitesse a avoir en quittant cette case
+                li_traj_poss = []
+                for i in nb_ligne_arr:
+                    li += trajets_possibles( nb_ligne, nb_colonne, i)
+                
+                
