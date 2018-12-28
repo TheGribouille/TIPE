@@ -1,4 +1,6 @@
 ## Circuits et Parametres
+import time
+
 map = [[0, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0], [0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0], [0, 0, 2, 2, 2, 2, 0, 0, 0, 0, 0], [0, 0, 0, 3, 3, 3, 3, 0, 0, 0, 0], [0, 0, 0, 4, 4, 4, 4, 0, 0, 0, 0], [0, 0, 0, 0, 5, 5, 5, 5, 5, 0, 0], [0, 0, 0, 0, 0, 6, 6, 6, 6, 6, 0], [0, 0, 0, 7, 7, 7, 7, 7, 7, 0, 0], [0, 8, 8, 8, 8, 8, 8, 8, 0, 0, 0], [0, 9, 9, 9, 9, 9, 9, 0, 0, 0, 0], [0, 10, 10, 10, 10, 0, 0, 0, 0, 0, 0]]
 
 N = len(map) # map est une matrice caree
@@ -20,17 +22,20 @@ v_max = 5
 v = (0, 0) # (v_x horizontale , v_y  verticale tjs stm positive dans les prochains coups) 
 n = 0
 
-## Algo dynamique
+## Algo dynamique"aucune case O ne bloque le chemin"
 def vitesse_compatible(v1, v2): #teste si en arrivant dans une case a v1, en la supposant dans les bornes, on peut la quitter a v2
     vx1, vy1 = v1
     vx2, vy2 = v2
     bornes_vx = range(-v_max, v_max + 1)
-    bonres_vy = range(1, v_max)
+    bornes_vy = range(1, v_max)
     if vx2 in bornes_vx and vy2 in bornes_vy:
         if vy2 in [vy1, vy1 + 1, vy1 - 1]:
             if vx2 in [vx1, vx1 + 1, vx1 - 1]:
                 return True
     return False
+
+def mouvement_possible(x, y, x2, y2, map):
+    return True
 
 def cases_accessibles(x, y, map): #renvoie la listes de (x', y') accessibles depuis x, y
     c_a = []
@@ -38,8 +43,8 @@ def cases_accessibles(x, y, map): #renvoie la listes de (x', y') accessibles dep
         for j in range(1, v_max + 1):
             if 0<=x + i < N and y + j < N:
                 if map[y + j][x + i] !=0:
-                    if "aucune case O ne bloque le chemin":
-                        c_a = (x + i, y + j) + c_a
+                    if mouvement_possible(x, y, x + i, y + j, map):
+                        c_a = [(x + i, y + j)] + c_a
     return c_a
 
 def trajets_possibles(x, y, map, trajets):
@@ -56,14 +61,15 @@ def trajets_possibles(x, y, map, trajets):
         #ne fait rien si t2 vide, ie si aucun chemin ne mene a l'arrivee
             v_dep = t2[i][1]
             if vitesse_compatible(v_nec, v_dep):
-                traj = (x2, y2) + t2[i][2]
+                traj = [(x2, y2)] + t2[i][2]
                 #on ajoute la case (x2, y2) au trajet car on part de (x, y)
-                t = t + (len(traj), v_nec, traj )
+                t = t + [(len(traj), v_nec, traj )]
                 #on ajoute ce nouveau trajet de (x, y) a (x_arr, N - 1) dans la liste
                 #des trajets de (x, y) a une case d'arrivee qcq
     return t
 
 def plus_courts_chemin(map):
+    t1 = time.clock()
     N = len(map)
     nb_ligne_arr = [i for i in range(N) if map[N - 1][i] != 0]
     trajets = [[[] for x in range(N) ] for y in range(N)]
@@ -91,9 +97,10 @@ def plus_courts_chemin(map):
             for traj in trajets[0][x]:
                 v_dep = traj[1]
                 if vitesse_compatible((0, 0), v_dep):
-                    trajet_totaux = traj + trajet_totaux
+                    trajets_totaux = traj + trajets_totaux
     trajet_opt = min(trajets_totaux)
-    return trajet_opt
+    t2 = time.clock
+    return trajet_opt, t2 - t1
             
 # A chaque case, on regarde toutes les autres cases accessibles (qui sont + proches de l'arrivee)
 # et on prend les chemins de cette nouvelle case qui ont une vitesse de depart compatible avec
