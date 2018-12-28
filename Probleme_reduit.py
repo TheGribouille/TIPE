@@ -25,7 +25,7 @@ def vitesse_compatible(v1, v2): #teste si en arrivant dans une case a v1, en la 
     vx1, vy1 = v1
     vx2, vy2 = v2
     bornes_vx = range(-v_max, v_max + 1)
-    bonres_vy = range(-v_max, 0)
+    bonres_vy = range(1, v_max)
     if vx2 in bornes_vx and vy2 in bornes_vy:
         if vy2 in [vy1, vy1 + 1, vy1 - 1]:
             if vx2 in [vx1, vx1 + 1, vx1 - 1]:
@@ -35,22 +35,29 @@ def vitesse_compatible(v1, v2): #teste si en arrivant dans une case a v1, en la 
 def cases_accessibles(x, y, map): #renvoie la listes de (x', y') accessibles depuis x, y
     c_a = []
     for i in range(-v_max, v_max + 1):
-        for j in range(-v_max, 0):
-            if ...:
-                c_a = (x + i, y + j) + c_a
+        for j in range(1, v_max + 1):
+            if 0<=x + i < N and y + j < N:
+                if map[x + i][y + j] !=0:
+                    if "aucune case O ne bloque le chemin":
+                        c_a = (x + i, y + j) + c_a
     return c_a
 
 def trajets_possibles(x, y, x_arr, map, trajets):
     #map[x][y] != 0
     #y_arr = N - 1
     #renvoie la liste des (v_dep, [cases du trajet], nb de cases)
-    t = trajets[x][y] # pour l'instant aucuntrajet de (x, y) a (x_arr, N - 1)
+    t = trajets[x][y] # pour l'instant = [] car aucun trajet de (x, y) a (x_arr, N - 1)
     c_a = cases_accessibles(x, y, map)
     for case in c_a:
         x2, y2 = case
         v_dep = y2 - y, x2 - x
-        
-    
+        traj = (x2, y2) + trajets[x2][y2][1]
+        #on ajoute la case (x2, y2) au trajet car on part de (x, y)
+        t = t + (v_dep, traj, len(traj))
+        #on ajoute ce nouveau trajet de (x, y,) a (x_arr, N - 1) dans la liste
+        #des trajet de (x, y) a une case d'arrivee qcq
+    trajets[x][y] = t
+    return trajets
 
 #On part de la dernière ligne et on remonte jusqu'a la premiere
 def plus_courts_chemin(map):
@@ -72,4 +79,4 @@ def plus_courts_chemin(map):
                 
 # A chaque case, on regarde toutes les autres cases accessibles (qui sont + proches de l'arrivee)
 # et on prend les chemins de cette nouvelle case qui ont une vitesse de depart compatible avec
-# la vitesse requise pour acceder a cette case
+# la vitesse requise pour acceder a cette case.
