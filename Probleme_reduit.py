@@ -92,7 +92,8 @@ def plus_courts_chemin(map):
                 v_dep = traj[1]
                 if vitesse_compatible((0, 0), v_dep):
                     trajet_totaux = traj + trajet_totaux
-    
+    trajet_opt = min(trajets_totaux)
+    return trajet_opt
             
 # A chaque case, on regarde toutes les autres cases accessibles (qui sont + proches de l'arrivee)
 # et on prend les chemins de cette nouvelle case qui ont une vitesse de depart compatible avec
