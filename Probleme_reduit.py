@@ -17,7 +17,7 @@ def print_map(map):
         
 #Quantité initiales (v_max en norme infinie)
 v_max = 5
-v = (0, 0) # (v_x horizontale , v_y  verticale tjs stm negative dans les prochains coups) 
+v = (0, 0) # (v_x horizontale , v_y  verticale tjs stm positive dans les prochains coups) 
 n = 0
 
 ## Algo dynamique
@@ -45,20 +45,20 @@ def cases_accessibles(x, y, map): #renvoie la listes de (x', y') accessibles dep
 def trajets_possibles(x, y, map, trajets):
     #map[x][y] != 0
     #y_arr = N - 1
-    #renvoie la liste des (v_dep, [cases du trajet], nb de cases)
-    t = trajets[y][x] # pour l'instant = [] car aucun trajet de (x, y) a (x_arr, N - 1)
+    #renvoie la liste des (nb de cases, v_dep, [cases du trajet] )
+    t = trajets[y][x] # pour l'instant t = [] car aucun trajet de (x, y) a (x_arr, N - 1)
     c_a = cases_accessibles(x, y, map)
     for case in c_a:
         x2, y2 = case
-        v_nec = y2 - y, x2 - x
+        v_nec = x2 - x, y2 - y
         t2 = trajets[y2][x2]
         for i in range(len(t2)):
         #ne fait rien si t2 vide, ie si aucun chemin ne mene a l'arrivee
-            v_dep = t2[i][0]
+            v_dep = t2[i][1]
             if vitesse_compatible(v_nec, v_dep):
-                traj = (x2, y2) + t2[i][1]
+                traj = (x2, y2) + t2[i][2]
                 #on ajoute la case (x2, y2) au trajet car on part de (x, y)
-                t = t + (v_nec, traj, len(traj))
+                t = t + (len(traj), v_nec, traj )
                 #on ajoute ce nouveau trajet de (x, y) a (x_arr, N - 1) dans la liste
                 #des trajets de (x, y) a une case d'arrivee qcq
     return t
@@ -67,9 +67,9 @@ def plus_courts_chemin(map):
     N = len(map)
     nb_ligne_arr = [i for i in range(N) if map[N - 1][i] != 0]
     trajets = [[[] for x in range(N) ] for y in range(N)]
-    # liste des [(v_dep, [cases du trajet], nb de cases), ...] pour ts x, y
+    # liste des [(nb de cases, v_dep, [cases du trajet]), ...] pour ts x, y
     for j in nb_ligne_arr:
-        trajets[N - 1][j] = [(v_x, v_y, [], 0) for v_x in range(-v_max, v_max + 1) for v_y in range(1, v_max + 1)]
+        trajets[N - 1][j] = [(0, (v_x, v_y), []) for v_x in range(-v_max, v_max + 1) for v_y in range(1, v_max + 1)]
         #on peut arriver dans ces case avec n'importe quelle vitesse
         #donc il faut faire en sorte que toutes les vitesses d'arrivees soient compatibles
         #donc on dit qu'on peut quitter ces cases avec n'importe quelle vitesse
@@ -85,7 +85,15 @@ def plus_courts_chemin(map):
                 #On associe a cette case la liste des trajets possibles
                 #pour atteindre une case N (avec la vitesse a avoir en quittant cette case)
                 trajets[y][x] = trajets_possibles( x, y, map, trajets)
-                
+    trajets_totaux = []
+    for x in range(N):
+        if map[0][x] != 0: #on trouve la case depart
+            for traj in trajets[0][x]:
+                v_dep = traj[1]
+                if vitesse_compatible((0, 0), v_dep):
+                    trajet_totaux = traj + trajet_totaux
+    
+            
 # A chaque case, on regarde toutes les autres cases accessibles (qui sont + proches de l'arrivee)
 # et on prend les chemins de cette nouvelle case qui ont une vitesse de depart compatible avec
 # la vitesse requise pour acceder a cette case.
