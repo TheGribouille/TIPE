@@ -42,7 +42,7 @@ def cases_accessibles(x, y, map): #renvoie la listes de (x', y') accessibles dep
                         c_a = (x + i, y + j) + c_a
     return c_a
 
-def trajets_possibles(x, y, x_arr, map, trajets):
+def trajets_possibles(x, y, map, trajets):
     #map[x][y] != 0
     #y_arr = N - 1
     #renvoie la liste des (v_dep, [cases du trajet], nb de cases)
@@ -50,32 +50,42 @@ def trajets_possibles(x, y, x_arr, map, trajets):
     c_a = cases_accessibles(x, y, map)
     for case in c_a:
         x2, y2 = case
-        v_dep = y2 - y, x2 - x
-        traj = (x2, y2) + trajets[x2][y2][1]
-        #on ajoute la case (x2, y2) au trajet car on part de (x, y)
-        t = t + (v_dep, traj, len(traj))
-        #on ajoute ce nouveau trajet de (x, y,) a (x_arr, N - 1) dans la liste
-        #des trajet de (x, y) a une case d'arrivee qcq
-    trajets[x][y] = t
-    return trajets
+        v_nec = y2 - y, x2 - x
+        t2 = trajets[x2][y2]
+        for i in range(len(t2)): #ne fait rien si t2 vide, ie si aucun chemin possible
+            v_dep = t2[i][0]
+            if vitesse_compatible(v_nec, v_dep):
+                traj = (x2, y2) + t2[i][1]
+                #on ajoute la case (x2, y2) au trajet car on part de (x, y)
+                t = t + (v_nec, traj, len(traj))
+                #on ajoute ce nouveau trajet de (x, y) a (x_arr, N - 1) dans la liste
+                #des trajets de (x, y) a une case d'arrivee qcq
+    return t
 
-#On part de la dernière ligne et on remonte jusqu'a la premiere
 def plus_courts_chemin(map):
     N = len(map)
     nb_ligne_arr = [i for i in range(N) if map[N - 1][i] != 0]
-    trajets = [] # liste des (v_dep, [cases du trajet], nb de cases)
-    for nb_ligne in range(N - 1, -1, -1):
-        #A chaque ligne, on determine pour chaque case du circuit (case !=0) en combien de coups on peut atteindre une case N.
-        #Il faut definir un coup et en donner les parametres.
+    trajets = [[[] for x in range(N) ] for y in range(N)]
+    # liste des [(v_dep, [cases du trajet], nb de cases), ...] pour ts x, y
+    for j in nb_ligne_arr:
+        trajets[N - 1][j] = [(v_x, v_y, [], 0) for v_x in range(-v_max, v_max + 1) for v_y in range(1, v_max + 1)]
+        #on peut arriver dans ces case avec n'importe quelle vitesse
+        #donc il faut faire en sorte que toutes les vitesses d'arrivees soient compatibles
+        #donc on dit qu'on peut quitter ces cases avec n'importe quelle vitesse
+
+    #On part de la dernière ligne et on remonte jusqu'a la premiere
+    for nb_ligne in range(N - 2, -1, -1):
+        #A chaque ligne, on determine pour chaque case du circuit (case !=0)
+        #en combien de coups (cases intermediaires)on peut atteindre une case N.
         ligne = map[nb_ligne]
         for nb_colonne in range(N):
             case = ligne[nb_colonne]
             if case != 0:
                 #On associe a cette case la liste des trajets possibles
-                #pour atteindre une case N avec la vitesse a avoir en quittant cette case
+                #pour atteindre une case N (avec la vitesse a avoir en quittant cette case)
                 li_traj_poss = []
                 for i in nb_ligne_arr:
-                    li = trajets_possibles( nb_ligne, nb_colonne, i) + li
+                    trajets[x][y] = trajets_possibles( nb_ligne, nb_colonne, map, trajets)
                 
 # A chaque case, on regarde toutes les autres cases accessibles (qui sont + proches de l'arrivee)
 # et on prend les chemins de cette nouvelle case qui ont une vitesse de depart compatible avec
