@@ -97,9 +97,9 @@ def plus_courts_chemin(map):
             for traj in trajets[0][x]:
                 v_dep = traj[1]
                 if vitesse_compatible((0, 0), v_dep):
-                    trajets_totaux = traj + trajets_totaux
+                    trajets_totaux = [traj] + trajets_totaux
     trajet_opt = min(trajets_totaux)
-    t2 = time.clock
+    t2 = time.clock()
     return trajet_opt, t2 - t1
             
 # A chaque case, on regarde toutes les autres cases accessibles (qui sont + proches de l'arrivee)
