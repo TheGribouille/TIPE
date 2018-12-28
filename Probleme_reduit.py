@@ -1,6 +1,6 @@
 ## Circuits et Parametres
 import time
-
+from numpy import linspace as ls
 map = [[0, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0], [0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0], [0, 0, 2, 2, 2, 2, 0, 0, 0, 0, 0], [0, 0, 0, 3, 3, 3, 3, 0, 0, 0, 0], [0, 0, 0, 4, 4, 4, 4, 0, 0, 0, 0], [0, 0, 0, 0, 5, 5, 5, 5, 5, 0, 0], [0, 0, 0, 0, 0, 6, 6, 6, 6, 6, 0], [0, 0, 0, 7, 7, 7, 7, 7, 7, 0, 0], [0, 8, 8, 8, 8, 8, 8, 8, 0, 0, 0], [0, 9, 9, 9, 9, 9, 9, 0, 0, 0, 0], [0, 10, 10, 10, 10, 0, 0, 0, 0, 0, 0]]
 
 N = len(map) # map est une matrice caree
@@ -35,6 +35,52 @@ def vitesse_compatible(v1, v2): #teste si en arrivant dans une case a v1, en la 
     return False
 
 def mouvement_possible(x, y, x2, y2, map):
+    N = len(map)
+    c = x2 - x / (y2 - y)
+    absc = ls(y, y2, 10 * N)
+    ordo = x + c * absc
+    for i in range(10 * N):
+    #Il faut trouver la case correspondante:
+        a = absc[i]
+        o = ordo[i]
+        if a - floor(a) < ceil(a) - a:
+            case_y = floor(a)
+            if o - floor(o) < ceil(o) - o:
+                case_x = floor(o)
+                if map[case_y][case_x] == 0:
+                    return False
+            elif o - floor(o) > ceil(o) - o:
+                case_x = ceil(o)
+                if map[case_y][case_x] == 0:
+                    return False
+            else:
+                if map[case_y][floor(o)] == 0 and map[case_y][ceil(o)] == 0:
+                    return False
+        elif a - floor(a) > ceil(a) - a:
+            case_y = ceil(a)
+            if o - floor(o) < ceil(o) - o:
+                case_x = floor(o)
+                if map[case_y][case_x] == 0:
+                    return False
+            elif o - floor(o) > ceil(o) - o:
+                case_x = ceil(o)
+                if map[case_y][case_x] == 0:
+                    return False
+            else:
+                if map[case_y][floor(o)] == 0 and map[case_y][ceil(o)] == 0:
+                    return False
+        else:
+            if o - floor(o) < ceil(o) - o:
+                case_x = floor(o)
+                if map[floor(a)][case_x] == 0 and map[ceil(a)][case_x] == 0:
+                    return False
+            elif o - floor(o) > ceil(o) - o:
+                case_x = ceil(o)
+                if map[floor(a)][case_x] == 0 and map[ceil(a)][case_x] == 0:
+                    return False
+            else:
+                if map[floor(a)][floor(o)] == 0 and map[floor(a)][ceil(o)] == 0 and map[ceil(a)][floor(o)] == 0 and map[ceil(a)][ceil(o)] == 0:
+                    return False
     return True
 
 def cases_accessibles(x, y, map): #renvoie la listes de (x', y') accessibles depuis x, y
