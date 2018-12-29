@@ -2,16 +2,21 @@
 import time
 from numpy import linspace as ls
 from math import floor, ceil
+
 map = [[0, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0], [0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0], [0, 0, 2, 2, 2, 2, 0, 0, 0, 0, 0], [0, 0, 0, 3, 3, 3, 3, 0, 0, 0, 0], [0, 0, 0, 4, 4, 4, 4, 0, 0, 0, 0], [0, 0, 0, 0, 5, 5, 5, 5, 5, 0, 0], [0, 0, 0, 0, 0, 6, 6, 6, 6, 6, 0], [0, 0, 0, 7, 7, 7, 7, 7, 7, 0, 0], [0, 8, 8, 8, 8, 8, 8, 8, 0, 0, 0], [0, 9, 9, 9, 9, 9, 9, 0, 0, 0, 0], [0, 10, 10, 10, 10, 0, 0, 0, 0, 0, 0]]
 
 N = len(map) # map est une matrice caree
 tableau = [[[0 for j in range(2)] for k in range(N)] for l in range(N)]
 
-def print_map(map):
+def print_map(map, x, y):
     for i in range(N):
         for j in range(N):
-            if map[i][j] == 0:
+            if i == x and j == y:
+                print(" |_| ",end="")
+            elif map[i][j] == 0:
                 print("   ",end="")
+            elif map[i][j] == -1:
+                print("-1 ",end="")
             elif map[i][j] >= 10:
                 print(map[i][j],end=" ")
             else:
@@ -116,7 +121,6 @@ def trajets_possibles(x, y, map, trajets):
     return t
 
 def plus_court_chemin(map):
-    t1 = time.clock()
     N = len(map)
     nb_ligne_arr = [i for i in range(N) if map[N - 1][i] != 0]
     trajets = [[[] for x in range(N) ] for y in range(N)]
@@ -146,9 +150,19 @@ def plus_court_chemin(map):
                 if vitesse_compatible((0, 0), v_dep):
                     trajets_totaux = [traj] + trajets_totaux
     trajet_opt = min(trajets_totaux)
-    t2 = time.clock()
-    return trajet_opt, t2 - t1
-            
+    return trajet_opt
 # A chaque case, on regarde toutes les autres cases accessibles (qui sont + proches de l'arrivee)
 # et on prend les chemins de cette nouvelle case qui ont une vitesse de depart compatible avec
 # la vitesse requise pour acceder a cette case.
+
+def algo(map):
+    t1 = time.clock()
+    trajet = plus_court_chemin(map)
+    etapes = trajet[2]
+    for case in etapes:
+        x, y = case
+        print_map(map, x, y)
+        print("")
+    t2 = time.clock()
+    temps = t2 - t1
+    print("temps = ", temps)
