@@ -12,7 +12,7 @@ def print_map(map, x, y):
     for i in range(N):
         for j in range(N):
             if j == x and i == y:
-                print(" |_| ",end="")
+                print(" _ ",end="")
             elif map[i][j] == 0:
                 print("   ",end="")
             elif map[i][j] == -1:
@@ -165,4 +165,4 @@ def algorithme(map):
         print("")
     t2 = time.clock()
     temps = t2 - t1
-    print("Nombre de coups = ", trajet[0], "\n", "Temps = ", temps)
+    print("Nombre de coups = ", trajet[0], "\n", "temps = ", temps)
