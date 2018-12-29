@@ -3,6 +3,7 @@ Utilisation d'un algo dynamique pour trouver une trajectoire et les vitesses cor
 
 temps d'exécution moyens de l'algorithme:
 164s
+169s
 171s
 175s
  -> Environ 3 minutes (à essayer sur un autre ordinateur)
