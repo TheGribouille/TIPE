@@ -3,15 +3,15 @@ import time
 from numpy import linspace as ls
 from math import floor, ceil
 
-map = [[0, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0], [0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0], [0, 0, 2, 2, 2, 2, 0, 0, 0, 0, 0], [0, 0, 0, 3, 3, 3, 3, 0, 0, 0, 0], [0, 0, 0, 4, 4, 4, 4, 0, 0, 0, 0], [0, 0, 0, 0, 5, 5, 5, 5, 5, 0, 0], [0, 0, 0, 0, 0, 6, 6, 6, 6, 6, 0], [0, 0, 0, 7, 7, 7, 7, 7, 7, 0, 0], [0, 8, 8, 8, 8, 8, 8, 8, 0, 0, 0], [0, 9, 9, 9, 9, 9, 9, 0, 0, 0, 0], [0, 10, 10, 10, 10, 0, 0, 0, 0, 0, 0]]
+map = [[0, 0, 0, _, 0, 0, 0, 0, 0, 0, 0], [0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0], [0, 0, 2, 2, 2, 2, 0, 0, 0, 0, 0], [0, 0, 0, 3, 3, 3, 3, 0, 0, 0, 0], [0, 0, 0, 4, 4, 4, 4, 0, 0, 0, 0], [0, 0, 0, 0, 5, 5, 5, 5, 5, 0, 0], [0, 0, 0, 0, 0, 6, 6, 6, 6, 6, 0], [0, 0, 0, 7, 7, 7, 7, 7, 7, 0, 0], [0, 8, 8, 8, 8, 8, 8, 8, 0, 0, 0], [0, 9, 9, 9, 9, 9, 9, 0, 0, 0, 0], [0, 10, 10, 10, 10, 0, 0, 0, 0, 0, 0]]
 
 N = len(map) # map est une matrice caree
 tableau = [[[0 for j in range(2)] for k in range(N)] for l in range(N)]
 
-def print_map(map, x, y):
+def print_map(map, etapes):
     for i in range(N):
         for j in range(N):
-            if j == x and i == y:
+            if (j, i) in etapes:
                 print("_  ",end="")
             elif map[i][j] == 0:
                 print("   ",end="")
@@ -24,7 +24,7 @@ def print_map(map, x, y):
         print("")
         
 #Quantité initiales (v_max en norme infinie)
-v_max = 5
+v_max = 3
 v = (0, 0) # (v_x horizontale , v_y  verticale tjs stm positive dans les prochains coups) 
 n = 0
 
@@ -159,11 +159,9 @@ def algorithme(map):
     t1 = time.clock()
     trajet = plus_court_chemin(map)
     etapes = trajet[2]
-    for case in etapes:
-        x, y = case
-        print_map(map, x, y)
-        print("")
+    print_map(map, etapes)
     t2 = time.clock()
     temps = t2 - t1
     print("Nombre de coups = ", trajet[0], "\n", "Temps = ", temps)
-   #(4, (1, 1), [(4, 1), (5, 3), (5, 6), (4, 10)])
+
+#(4, (1, 1), [(4, 1), (5, 3), (5, 6), (4, 10)]) pour v_max = 5
