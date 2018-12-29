@@ -28,7 +28,7 @@ v_max = 5
 v = (0, 0) # (v_x horizontale , v_y  verticale tjs stm positive dans les prochains coups) 
 n = 0
 
-## Algo dynamique"aucune case O ne bloque le chemin"
+## Algo dynamique
 def vitesse_compatible(v1, v2): #teste si en arrivant dans une case a v1, en la supposant dans les bornes, on peut la quitter a v2
     vx1, vy1 = v1
     vx2, vy2 = v2
