@@ -2,13 +2,15 @@
 Utilisation d'un algo dynamique pour trouver une trajectoire et les vitesses correspondantes dans un circuit discretisé.
 
 Temps d'exécution moyens de l'algorithme:
-	sur un circuit de taille 11:
+	sur un circuit de taille 11 pour v_max = 5 (4 coups):
 	164s
 	169s
 	171s
 	175s
 	175s
  	-> Environ 3 minutes (à essayer sur un autre ordinateur)
+	sur un circuit de taille 11 pour v_max = 3 (6 coups):
+	111s
 
 Problèmes à résoudre:
 - Choisir la vitesse max à chaque étape = optimal? (Contre-exemple?)
