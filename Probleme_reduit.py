@@ -11,7 +11,7 @@ tableau = [[[0 for j in range(2)] for k in range(N)] for l in range(N)]
 def print_map(map, x, y):
     for i in range(N):
         for j in range(N):
-            if i == x and j == y:
+            if j == x and i == y:
                 print(" |_| ",end="")
             elif map[i][j] == 0:
                 print("   ",end="")
@@ -155,7 +155,7 @@ def plus_court_chemin(map):
 # et on prend les chemins de cette nouvelle case qui ont une vitesse de depart compatible avec
 # la vitesse requise pour acceder a cette case.
 
-def algo(map):
+def algorithme(map):
     t1 = time.clock()
     trajet = plus_court_chemin(map)
     etapes = trajet[2]
@@ -165,4 +165,4 @@ def algo(map):
         print("")
     t2 = time.clock()
     temps = t2 - t1
-    print("temps = ", temps)
+    print("Nombre de coups = ", trajet[0], "\n", "Temps = ", temps)
