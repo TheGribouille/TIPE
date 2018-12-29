@@ -1,12 +1,14 @@
 ## Première Partie
 Utilisation d'un algo dynamique pour trouver une trajectoire et les vitesses correspondantes dans un circuit discretisé.
 
-temps d'exécution moyens de l'algorithme:
-164s
-169s
-171s
-175s
- -> Environ 3 minutes (à essayer sur un autre ordinateur)
+Temps d'exécution moyens de l'algorithme:
+	sur un circuit de taille 11:
+	164s
+	169s
+	171s
+	175s
+	175s
+ 	-> Environ 3 minutes (à essayer sur un autre ordinateur)
 
 Problèmes à résoudre:
 - Choisir la vitesse max à chaque étape = optimal? (Contre-exemple?)
