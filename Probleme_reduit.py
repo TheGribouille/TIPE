@@ -1,3 +1,23 @@
+##désolé je ne savais pas où le mettre d'autre
+
+Motivations :
+
+Les voitures autonomes sont en plein développement 
+et sont destinées à remplacer les véhicules actuels. 
+Le problème central est l'algorithme de prise de décision 
+pour le pilotage du véhicule. Mais l'utilisation d'un réseau 
+de neurones entraîné par un algorithme génétique semble prometteuse 
+pour résoudre ce problème. 
+
+Ancrage dans le sujet :
+
+On s'intéressera au pilotage d'un véhicule 
+dans une simulation informatique d'un circuit. 
+L’algorithme final obtenu devrait pouvoir piloter 
+une voiture réelle équipée de capteurs adéquats.
+
+
+
 ## Circuits et Parametres
 import time
 from numpy import linspace as ls
