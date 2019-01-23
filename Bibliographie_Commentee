@@ -1,1 +1,25 @@
 BIBLIOGRAPHIE COMMENTÉE
+
+
+
+	Les voitures actuelles s'orientent progressivement vers un mode de fonctionnement autonome. Cette automatisation a commencée par l'ajout progressif d'outils d'aide à la conduite et repose aujourd'hui sur des algorithmes de pilotage qui prennent des décisions en fonction des données des capteurs du véhicule. Les algorithmes les plus utilisés reposent sur des méthodes de machines learning(ou apprentissage automatique?) à def !!!, 
+
+	Plusieurs méthodes d’apprentissage sont utilisées.Tout d'abord, l'apprentissage supervisé consiste à fournir une base de données assez conséquente à l'algorithme, pour que ce dernier puisse apprendre à partir de ceux ci et ensuite généraliser à des situations différentes. La base de donnée est obtenue en enregistrant des séquences de pilotage de voiture en simulation informatique par un humain.
+apprentissage par renforcement
+ex à dvlp car c'est ce qu'on fait : algo génétiques justification (algorithmes génétiques fondement mathématique)?
+« « L'utilisation d'algorithmes génétiques, dans la résolution de problèmes, est à l'origine le fruit des recherches de John Holland et de ses collègues et élèves de l'Université du Michigan qui ont, dès 1960, travaillé sur ce sujet. La nouveauté introduite par ce groupe de chercheurs a été la prise en compte de l'opérateur d'enjambement (cross-over) en complément des mutations. » » wiki
+(vue d'ensemble du darwinisme appliqué à l'informatique)(tuto algo génétiques)
+
+
+en parallèle
+
+traitement données des capteurs
+reconnaissance image réseau de neurones très récent (Leçon inaugurale)
+
+application aujourd'hui « google car »  conduit sans chauffeur en respectant le code de la route 
+3,2 millions de kilomètres qui était effectués en octobre 2016 
+→ mais avec chauffeur et des reprises → manque de fiabilité subsite
+
+truc à rajouter :
+fiabilité 
+
