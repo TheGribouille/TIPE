@@ -1,30 +1,60 @@
-BIBLIOGRAPHIE COMMENTÉE
-
-#mettre des renvois numérotés,nom et des dates
-
-	Les voitures actuelles s'orientent progressivement vers un mode de fonctionnement autonome. Cette automatisation a commencée par l'ajout progressif d'outils d'aide à la conduite et repose aujourd'hui sur des algorithmes de pilotage qui prennent des décisions en fonction des données des capteurs du véhicule. Les algorithmes les plus utilisés reposent sur des méthodes de machines learning (ou apprentissage automatique). Il s'agit d'un ensemble de méthodes permettant à un programme d'apprendre à partir de données, sans devoir coder explicitement la résolution.
-
-	Plusieurs méthodes d’apprentissage sont utilisées.Tout d'abord, l'apprentissage supervisé consiste à fournir une base de données assez conséquente à l'algorithme, pour que ce dernier puisse apprendre à partir de ceux ci et ensuite généraliser à des situations différentes. La base de donnée est obtenue en enregistrant des séquences de pilotage de voiture en simulation informatique par un humain. Ceci n'est pas le cas de l'apprentissage par renforcement. Il s'agit, pour un *** d'apprendre les décisions à prendre pour optimiser une fonction par expériences successives. Lors de ces expériences, l'algorithme évolue vers une possible solution par un système de récompense. Les algorithmes génétiques sont l'une de ces méthodes. Ces algorithmes sont inspirés du mécanisme de sélection naturel
+					MCOT	
+	
+####j'ai laissé les annotations, je les enleverais avant l'envoie  à Tourniaire	
+	
+	Biblio commentée
 
 
+	Les voitures actuelles s'orientent progressivement vers un mode de fonctionnement autonome. Cette automatisation a commencée par l'ajout progressif d'outils d'aide à la conduite et repose aujourd'hui sur des algorithmes de pilotage qui prennent des décisions en fonction des données des capteurs du véhicule. Les algorithmes les plus utilisés reposent sur des méthodes de machines learning (ou apprentissage automatique). Il s'agit d'un ensemble de méthodes permettant à un programme d'apprendre à partir de données, sans devoir coder explicitement la résolution. Les réseaux de neurones en sont un exemple.
 
-« « L'utilisation d'algorithmes génétiques, dans la résolution de problèmes, est à l'origine le fruit des recherches de John Holland et de ses collègues et élèves de l'Université du Michigan qui ont, dès 1960, travaillé sur ce sujet. La nouveauté introduite par ce groupe de chercheurs a été la prise en compte de l'opérateur d'enjambement (cross-over) en complément des mutations. » » wiki
-(vue d'ensemble du darwinisme appliqué à l'informatique)(tuto algo génétiques)
+	Plusieurs méthodes d’apprentissage sont utilisées.Tout d'abord, l'apprentissage supervisé consiste à fournir une base de données assez conséquente à l'algorithme, pour que ce dernier puisse apprendre à partir de celle ci et ensuite généraliser à des situations différentes. La base de données est obtenue en enregistrant des séquences de pilotage de voiture par un humain en simulation informatique. 
+	Ceci n'est pas le cas de l'apprentissage par renforcement. Il s'agit, pour un système d'apprendre les décisions à prendre pour optimiser une fonction par expériences successives. Lors de ces expériences, l'algorithme évolue vers une possible solution par un système de récompense. Les algorithmes génétiques sont l'une de ces méthodes. Ces algorithmes sont inspirés du mécanisme de sélection naturel:une population générée aléatoirement évolue par sélection, croisement et mutation.C'est une technique d'optimisation stochastique.(vue d'ensemble du darwinisme appliqué à l'informatique)(tuto algo génétiques) Ils sont devenus populaires après les travaux de John Holland et de son équipe de l'université du Michigan en 1960. Leur contribution majeure à été l'introduction de l'opérateur d'enjambement.
+Cependant la convergence vers une solution n'est pas garantie et ces algorithmes manquent de justification théoriques.justification théorique ?? algorithmes génétiques fondement mathématique (parler de théorie des schémas)
 
-justification théorique ?? algorithmes génétiques fondement mathématique (parler de théorie des shémas)
+	En parallèle de ces recherches, l'automatisation des voitures a aussi bénéficié du développement des technologies de capteurs et de traitement de données. En particulier, la reconnaissance d'image est un facteur important pour les voitures autonomes. Ce dernier s'effectue par l'utilisation de réseaux de neurones.(Leçon inaugurale) Le modèle de base est le perceptron, développé en 1957 par Frank Rosenblatt.+path finder
 
+	Les voitures autonomes existent déjà et sont testées par plusieurs entreprises mais rencontrent des problèmes de fiabilité, principalement dus au caractère heuristique des méthodes utilisées. Par exemple après de nombreux incidents, la société Uber à dû renoncer à ses expérimentation sur les routes de Californie. Le sujet est donc encore en plein développement. 
 
-en parallèle
-
-traitement données des capteurs en particulier
-reconnaissance image réseau de neurones très récent (Leçon inaugurale)
-
-application aujourd'hui « google car »  conduit sans chauffeur en respectant le code de la  route 
-3,2 millions de kilomètres qui était effectués en octobre 2016 
-→ mais avec chauffeur et des reprises → manque de fiabilité subsite
 
 truc à rajouter :
 fiabilité 
 nécessité algo stochastique
 heuristique
+
+
+
+	Problématique retenue
+
+On s'intéressera au problème du pilotage automatique d'une voiture dans un circuit simulé informatiquement. Les capteurs seront supposés parfaits et on s'affranchira des problèmes de traitement de l'information.
+
+
+	Objectifs du TIPE
+
+implémentation d'algorithme (en python) :
+	-simulation informatique du circuit
+	-réseau de neurones entraîné par algorithme génétique 
+Etude de la possibilité d'une résolution directe 
+→ montrer l'obligation d'utiliser une méthode heuristique
+Test de la fiabilité et de la capacité de généralisation du système
+
+
+	Bibliographie
+
+[1] - http://documents.irevues.inist.fr/bitstream/handle/2042/4402/000ED.PDF%20TEXTE.pdf?sequence=1
+vue d'ensemble du darwinisme appliqué à l'informatique(Evelyne Lutton)
+
+[2] - http://www.inf.ed.ac.uk/teaching/courses/nat/slides/nat03.pdf
+The Canonical Genetic Algorithm(Michael Herrmann)
+
+[3] - http://www.iro.umontreal.ca/~dift6751/cours_ga_theorie.pdf
+algorithmes génétiques fondement mathématique(université de Montréal)
+ 
+[4] - 04 février 2016 18:00 19:00 Leçon inauguraleAmphithéâtre Marguerite de Navarre - Marcelin Berthelot 
+réseau de neuronnes reconnaissance d'image(Yann Lecun)
+
+[5] - file:///C:/Users/user/Downloads/progdyn%20(1).pdf
+un cours de programmation dynamique(Claire Hanen)
+
+[6] - https://www.cs.ubbcluj.ro/~gabis/ml/ml-books/McGrawHill%20-%20Machine%20Learning%20-Tom%20Mitchell.pdf
+Machine Learning(Tom M. Mitchell)
 
